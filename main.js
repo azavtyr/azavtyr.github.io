@@ -230,41 +230,7 @@ function initContactForm() {
 }
 
 function initCustomCursor() {
-  const cursorDot = document.querySelector(".cursor-dot");
-  const hasFinePointer =
-    window.matchMedia && window.matchMedia("(pointer: fine)").matches;
-
-  if (!cursorDot || !hasFinePointer) {
-    return;
-  }
-
-  document.body.classList.add("has-custom-cursor");
-
-  const moveCursor = (event) => {
-    const { clientX, clientY } = event;
-    cursorDot.style.transform = `translate3d(${clientX}px, ${clientY}px, 0)`;
-  };
-
-  const activate = () => cursorDot.classList.add("is-active");
-  const deactivate = () => cursorDot.classList.remove("is-active");
-
-  window.addEventListener("mousemove", moveCursor);
-  window.addEventListener("mouseenter", () => {
-    cursorDot.classList.add("is-visible");
-  });
-  window.addEventListener("mouseleave", () => {
-    cursorDot.classList.remove("is-visible");
-  });
-
-  document.addEventListener("mouseover", (event) => {
-    const target = event.target;
-    if (!target) return;
-    if (target.closest("a, button, .btn, .project-card")) {
-      activate();
-    } else {
-      deactivate();
-    }
-  });
+  // Custom cursor intentionally removed – using the native cursor for clarity.
 }
 
 function init() {
