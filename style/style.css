@@ -3,6 +3,8 @@
     Oxygen, Ubuntu, Cantarell, "Droid Sans", "Helvetica Neue", sans-serif;
   --font-size: 1.2rem;
   --line-height: 1.5rem;
+
+  /* Color system (defaults – темна тема, буде перевизначена для світлої) */
   --bg-color: #171616;
   --fg-color: #fbf1c7;
   --logo-color: #ebdbb2;
@@ -12,11 +14,19 @@
   --subtext-color: #fb4934;
   --bg-card-color: #1b1a1a;
 
+  /* Motion & depth */
   --border-radius: 20%;
+  --radius-lg: 1rem;
+  --shadow-soft: 0 14px 35px rgba(0, 0, 0, 0.45);
+  --transition-fast: 150ms;
+  --transition-normal: 220ms;
 }
 
-* {
+*,
+*::before,
+*::after {
   margin: 0;
+  box-sizing: border-box;
 }
 
 body {
@@ -262,9 +272,171 @@ blockquote {
 .card {
   background-color: var(--bg-card-color);
   padding: 3rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  transition:
+    transform var(--transition-fast) ease-out,
+    box-shadow var(--transition-fast) ease-out,
+    border-color var(--transition-fast) ease-out,
+    background-color var(--transition-fast) ease-out;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-soft);
+  border-color: var(--accent-color);
 }
 
 .site-footer {
   text-align: center;
   margin-top: 5rem;
+}
+
+label {
+  padding: 1rem 0;
+}
+
+/* Custom cursor
+   -------------------------------------------------- */
+
+.has-custom-cursor {
+  cursor: none;
+}
+
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background-color: var(--accent-color);
+  pointer-events: none;
+  transform: translate3d(-100%, -100%, 0);
+  opacity: 0;
+  mix-blend-mode: difference;
+  transition:
+    transform 120ms ease-out,
+    opacity 220ms ease-out,
+    width 120ms ease-out,
+    height 120ms ease-out;
+  z-index: 9999;
+}
+
+.cursor-dot.is-visible {
+  opacity: 1;
+}
+
+.cursor-dot.is-active {
+  width: 18px;
+  height: 18px;
+}
+
+/* Buttons / clickable elements
+   -------------------------------------------------- */
+
+button,
+.btn {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 0.75rem 1.6rem;
+  border: 1px solid var(--accent-color);
+  background-color: transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-decoration: none;
+  transition:
+    background-color var(--transition-fast) ease-out,
+    color var(--transition-fast) ease-out,
+    border-color var(--transition-fast) ease-out,
+    transform var(--transition-fast) ease-out,
+    box-shadow var(--transition-fast) ease-out;
+}
+
+button:hover,
+.btn:hover {
+  background-color: var(--accent-color);
+  color: #1d2021;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+button:focus-visible,
+.btn:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
+}
+
+/* Theme toggle
+   -------------------------------------------------- */
+
+.theme-toggle {
+  border-radius: 999px;
+  border: 1px solid var(--hover-color);
+  padding: 0.35rem 0.9rem;
+  background-color: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+}
+
+.theme-toggle-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.theme-toggle[data-theme="dark"] .theme-toggle-icon::before {
+  content: "🌙";
+}
+
+.theme-toggle[data-theme="light"] .theme-toggle-icon::before {
+  content: "☀️";
+}
+
+/* Reveal animations
+   -------------------------------------------------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  filter: blur(3px);
+  transition:
+    opacity var(--transition-normal) ease-out,
+    transform var(--transition-normal) ease-out,
+    filter var(--transition-normal) ease-out;
+  will-change: opacity, transform, filter;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Page transitions */
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body.page-fade-in {
+  animation: page-fade-in var(--transition-normal) ease-out;
+}
+
+body.page-fade-out {
+  opacity: 0;
+  transition: opacity var(--transition-normal) ease-out;
 }

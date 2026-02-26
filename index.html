@@ -21,13 +21,14 @@
   <body>
     <header class="site-header">
       <nav class="site-nav">
-        <a href="#" class="logo">azavtyr</a>
+        <a href="/" class="logo">azavtyr</a>
         <ul class="menu">
           <li><a href="./content/resume.html">Resume</a></li>
           <li><a href="./content/setup.html">My Setup</a></li>
           <li><a href="./content/projects.html">Projects</a></li>
           <li><a href="https://azavtyr.github.io/notes">Docs</a></li>
           <li><a href="./content/contact.html">Contact</a></li>
+          <li><a href="./content/registration.html">Registration</a></li>
         </ul>
         <ul class="menu menu-social">
           <li>
@@ -60,9 +61,17 @@
           </li>
         </ul>
       </nav>
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-label="Toggle color theme"
+        >
+          <span class="theme-toggle-icon"></span>
+        </button>
+      </nav>
     </header>
     <main class="content">
-      <section class="hero">
+      <section class="hero reveal">
         <div class="greetings">
           <h1>Hey, I'm Dmytro!</h1>
           <p>
@@ -79,7 +88,7 @@
           </p>
         </div>
       </section>
-      <section class="card">
+      <section class="card reveal" data-reveal-delay="0.06s">
         <h2>Looking for something?</h2>
         <ul>
           <li>
@@ -108,5 +117,7 @@
     <footer class="site-footer">
       <p>&copy; 2025 azavtyr. All Rights Reserved.</p>
     </footer>
+    <div class="cursor-dot"></div>
+    <script src="/main.js" defer></script>
   </body>
 </html>
